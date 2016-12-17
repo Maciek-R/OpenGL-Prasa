@@ -1,10 +1,41 @@
 #include "Cube.h"
 
 Cube::Cube(Camera* cam) {
-	posX = 5;
-	posY = -1.5;
-	posZ = 0;
+	posX = 3;
+	posY = 0.5f;
+	posZ = 1;
+	scaleX = 1;
+	scaleY = 1;
+	scaleZ = 1;
 	this->cam = cam;
+	textureName = "res/all.png";
+	walec = NULL;
+	RotateZ = 0;
+}
+Cube::Cube(Camera* cam, float X, float Y, float Z) {
+	posX = X;
+	posY = Y;
+	posZ = Z;
+	scaleX = 1;
+	scaleY = 1;
+	scaleZ = 1;
+	this->cam = cam;
+	textureName = "res/all.png";
+	walec = NULL;
+	RotateZ = 0;
+}
+Cube::Cube(Camera* cam, float X, float Y, float Z, float scaleX, float scaleY, float scaleZ) {
+	posX = X;
+	posY = Y;
+	posZ = Z;
+
+	this->scaleX = scaleX;
+	this->scaleY = scaleY;
+	this->scaleZ = scaleZ;
+	this->cam = cam;
+	textureName = "res/all.png";
+	walec = NULL;
+	RotateZ = 0;
 }
 
 const GLchar* VertexShaderCube =
@@ -63,7 +94,7 @@ const GLchar* FragmentShaderCube =
 	"vec3 diffuse = diff * vec3(1.0f, 1.0f, 1.0f);\n"
 
 	/*"  out_Color = ex_Color;\n"\*/
-	"  out_Color = texture(Texture0, TexCoord)*vec4((diffuse + vec3(0.25f, 0.25f, 0.25f)), 1.0);\n"\
+	"  out_Color = texture(Texture0, TexCoord*5)*vec4((diffuse + vec3(0.25f, 0.25f, 0.25f)), 1.0);\n"\
 	"}\n"
 };
 
@@ -113,18 +144,6 @@ static GLuint LoadMipmapTexture(GLuint texId, const char* fname)
 
 void Cube::createCube()
 {
-	
-	/*GLfloat VERTICES[] =
-	{
-		 -.5f, -.5f,  .5f,		0, 0, 1,
-		 -.5f,  .5f,  .5f,		1, 0, 0,
-		 .5f,  .5f,  .5f,		0, 1, 0,
-		 .5f, -.5f,  .5f,		1, 1, 0,
-		 -.5f, -.5f, -.5f,		1, 1, 1,
-		 -.5f,  .5f, -.5f,		1, 0, 0,
-		 .5f,  .5f, -.5f,		1, 0, 1,
-		 .5f, -.5f, -.5f,		0, 0, 1 
-	};*/
 	GLfloat VERTICES[] = {
 	-0.5f, -0.5f, -0.5f,	 0.0f,  0.0f, -1.0f,		1.0f, 0, 0,			0.0f, 0.5f,
 	0.5f, -0.5f, -0.5f,		 0.0f,  0.0f, -1.0f,		1.0f, 0, 0,			0.33f, 0.5f,
@@ -169,19 +188,6 @@ void Cube::createCube()
 	-0.5f,  0.5f, -0.5f,	 0.0f,  1.0f,  0.0f,		1.0f, 0, 1.0f,			0.66f, 0.5f
 	};
 
-
-
-/*	GLuint INDICES[36] =
-	{
-		0,2,1,  0,3,2,
-		4,3,0,  4,7,3,
-		4,1,5,  4,0,1,
-		3,6,2,  3,7,6,
-		1,6,5,  1,2,6,
-		7,5,6,  7,4,5
-	};*/
-
-
 	glGenVertexArrays(1, &vaoId);
 	glBindVertexArray(vaoId);
 
@@ -212,13 +218,13 @@ void Cube::createCube()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	texture0 = LoadMipmapTexture(GL_TEXTURE0, "res/all.png");
+	texture0 = LoadMipmapTexture(GL_TEXTURE0, textureName);
 }
 
 void Cube::drawCube() {
 	glm::mat4  ProjectionMatrix, ViewMatrix, ModelMatrix;
 
-	ProjectionMatrix = glm::perspective(glm::radians(70.0f), (float)1024 / (float)768, 0.1f, 100.0f);
+	ProjectionMatrix = glm::perspective(glm::radians(70.0f), (float)1024 / (float)768, 0.1f, 1000.0f);
 
 	//if(cam->FIRST_PERSON_MODE)
 		ViewMatrix = glm::lookAt(cam->getVec3(), cam->getVec3() + cam->getLookAt(), glm::vec3(0, 1, 0));
@@ -235,8 +241,8 @@ void Cube::drawCube() {
 
 
 	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(posX, posY, posZ));
-	ModelMatrix = glm::rotate(ModelMatrix, Angle/5, glm::vec3(0, 1, 0));
-	//ModelMatrix = glm::scale(ModelMatrix, glm::vec3(0.5f, 0.5, 0.5));
+	ModelMatrix = glm::rotate(ModelMatrix, DegreesToRadians(RotateZ), glm::vec3(0, 0, 1));
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(scaleX, scaleY, scaleZ));
 
 
 	//glm::mat4 mvp = ProjectionMatrix*ViewMatrix*ModelMatrix;
@@ -251,7 +257,7 @@ void Cube::drawCube() {
 	glUniformMatrix4fv(View_Location, 1, GL_FALSE, &ViewMatrix[0][0]);
 	glUniformMatrix4fv(Projection_Location, 1, GL_FALSE, &ProjectionMatrix[0][0]);
 	//glUniform3f(lightPosLoc, cam->getX(), cam->getY(), cam->getZ());
-	glUniform3f(lightPosLoc, 0, 0, 0);
+	glUniform3f(lightPosLoc, 2, 1, 2);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture0);
@@ -262,4 +268,68 @@ void Cube::drawCube() {
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 	glUseProgram(0);
+}
+
+void Cube::move(int dir) {
+	clock_t Now = clock();
+
+	walec = NULL;
+	if (LastTime == 0)
+		LastTime = Now;
+
+	//Angle += 10 * ((float)(Now - LastTime) / CLOCKS_PER_SEC);
+
+	float przes =   ((float)(Now - LastTime) / CLOCKS_PER_SEC);
+	przes *= PREDKOSC;
+
+	if(dir==3)
+		posZ += przes;
+	else if(dir==2)
+		posZ -= przes;
+	else if (dir == 0)
+		posY += przes;
+	else if (dir == 1)
+		posY -= przes;
+
+	LastTime = Now;
+}
+void Cube::doNotMove() {
+	clock_t Now = clock();
+
+	if (LastTime == 0)
+		LastTime = Now;
+
+//	float posy = posY;
+
+	if (walec != NULL) {
+
+		if (walec->getScaleY() > 1.25) {
+			scaleY -= 0.02*PREDKOSC;
+			posY -= 0.01*PREDKOSC;
+			scaleZ += 0.015*PREDKOSC;
+			scaleX += 0.015*PREDKOSC;
+		}
+
+		if (walec->getScaleY() > 1.5) {
+			walec = NULL;
+			scaleY = 0.18;
+			
+			posY = 0.34;
+		//	std::cout << scaleZ;
+			scaleZ = 0.74;
+			scaleX = 0.74;
+		}
+	}
+
+	LastTime = Now;
+}
+
+void Cube::setTexture(char * textureName) {
+	this->textureName = textureName;
+}
+void Cube::setScaleYOf(Walec * walec) {
+	this->walec = walec;
+}
+void Cube::setRotateZ(float Z) {
+	RotateZ = Z;
 }

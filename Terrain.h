@@ -15,7 +15,7 @@
 
 class Terrain {
 private:
-	int SIZE = 100;
+	int SIZE = 12;
 	GLfloat VERTICES[VERTEX_COUNT*VERTEX_COUNT * 3];
 	GLfloat COLORS[VERTEX_COUNT*VERTEX_COUNT * 3];
 	GLuint INDICES[6 * (VERTEX_COUNT - 1)*(VERTEX_COUNT - 1)];
@@ -35,7 +35,7 @@ private:
 		eboId,
 		texId;
 	
-	float posX = 3;
+	float posX = 0;
 	float posY = 0;
 	float posZ = 0;
 

@@ -6,6 +6,8 @@
 #include <time.h>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
+#include<iostream>
+using namespace std;
 class Camera {
 private:
 	float X;

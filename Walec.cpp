@@ -2,9 +2,12 @@
 
 Walec::Walec(Camera * cam) {
 	posX = 5;
-	posY = -1;
-	posZ = 2;
+	posY = 2.0f;
+	posZ = 6;
 	this->cam = cam;
+	scaleY = 0.5;
+	up = 0;
+	running = false;
 }
 
 const GLchar* VertexShaderWalec =
@@ -282,7 +285,7 @@ void Walec::drawWalec() {
 	//ModelMatrix = glm::translate(ModelMatrix, glm::vec3(XXX - 1 - cameraPosX, -1 - cameraPosY, 0 - cameraPosZ));
 	//ModelMatrix = glm::rotate(ModelMatrix, Angle / 10, glm::vec3(0, 0, 1));
 	//ModelMatrix = glm::rotate(ModelMatrix, glm::radians(90.0f), glm::vec3(1, 0, 0));
-	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1, 2+sin(Angle), 1));
+	ModelMatrix = glm::scale(ModelMatrix, glm::vec3(0.25, scaleY, 0.25));
 	//ModelMatrix = glm::scale(ModelMatrix, glm::vec3(1, 2, 1));
 
 
@@ -307,4 +310,38 @@ void Walec::drawWalec() {
 
 	glBindVertexArray(0);
 	glUseProgram(0);
+}
+void Walec::serveTime() {
+	clock_t Now = clock();
+
+	if (LastTime == 0)
+		LastTime = Now;
+
+	if (running) {
+		float przes = ((float)(Now - LastTime) / CLOCKS_PER_SEC);
+		przes *= PREDKOSC;
+
+		if (!up) {
+			scaleY += przes;
+			if (scaleY > 1.54) up = 1;
+		}
+		else {
+			scaleY -= przes;
+			if (scaleY < 0.5) {
+				up = 0; 
+				stop();
+			}
+		}
+	}
+	
+	LastTime = Now;
+}
+void Walec::start() {
+	running = true;
+}
+void Walec::stop() {
+	running = false;
+}
+float Walec::getScaleY() {
+	return scaleY;
 }

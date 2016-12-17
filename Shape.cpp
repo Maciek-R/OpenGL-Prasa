@@ -3,9 +3,11 @@ const GLchar* VertexShader =
 {
 	"#version 400\n"\
 
-	"layout(location=0) in vec4 in_Position;\n"\
-	"layout(location=1) in vec4 in_Color;\n"\
+	"layout(location=0) in vec3 in_Position;\n"\
+	"layout(location=1) in vec3 in_Color;\n"\
+	"layout(location = 2) in vec2 texCoord;\n"\
 	"out vec4 ex_Color;\n"\
+	"out vec2 TexCoord;\n"\
 	//"uniform mat4 ModelMatrix;\n"
 	//"uniform mat4 ViewMatrix;\n"
 	//"uniform mat4 ProjectionMatrix;\n"
@@ -15,8 +17,9 @@ const GLchar* VertexShader =
 	//"gl_Position = in_Position;\n"
 	//"  gl_Position = (ProjectionMatrix * ViewMatrix * ModelMatrix) * in_Position;\n"
 	//"gl_Position = ViewMatrix * ModelMatrix * in_Position;\n"
-	"gl_Position = mvp * in_Position;\n"\
-	"  ex_Color = in_Color;\n"\
+	"gl_Position = mvp * vec4(in_Position, 1.0);\n"\
+	"  ex_Color = vec4(in_Color, 1.0);\n"\
+	"TexCoord = texCoord;\n"\
 	"}\n"
 };
 
@@ -25,11 +28,15 @@ const GLchar* FragmentShader =
 	"#version 400\n"\
 
 	"in vec4 ex_Color;\n"\
+	"in vec2 TexCoord;\n"\
 	"out vec4 out_Color;\n"\
+
+	"uniform sampler2D Texture0;\n"\
 
 	"void main(void)\n"\
 	"{\n"\
-	"  out_Color = ex_Color;\n"\
+	/*"  out_Color = ex_Color;\n"\*/
+	"  out_Color = texture(Texture0, TexCoord*5);\n"\
 	"}\n"
 };
 
@@ -110,16 +117,8 @@ void Shape::createShader() {
 	mvp_location = glGetUniformLocation(ProgramId, "mvp");
 }
 
-void Shape::createTriangle() {
-	/*const Vertex VERTICES[5] =
-	{
-		{ { -.5f, 0,  .5f, 1 },{ 0, 0, 1, 1 } },
-		{ { .5f, 0,  .5f, 1 }   ,{ 1, 0, 0, 1 } },
-		{ { .5f, 0,  -.5f, 1 }   ,{ 0, 1, 0, 1 } },
-		{ { -.5f, 0,  -.5f, 1 },{ 0, 1, 1, 1 } },
-		{ { 0, 1, 0, 1 }	  ,{ 1, 1, 0, 1 } }
-		
-	};*/
+/*void Shape::createTriangle() {
+	
 
 	GLfloat VERTICES[] = 
 	 { -.5f, 0,   .5f, 1,		  0, 0, 1, 1 ,
@@ -140,7 +139,7 @@ void Shape::createTriangle() {
 		1, 0, 0, 1,
 		0, 1, 0, 1,
 		0, 1, 1, 1,
-		1, 1, 0, 1}; */
+		1, 1, 0, 1}; 
 		
 	const GLuint INDICES[18] =
 	{
@@ -175,9 +174,9 @@ void Shape::createTriangle() {
 	ExitOnGLError("ERROR: Could not bind the IBO to the VAO");
 
 	glBindVertexArray(0);
-}
+}*/
 
-void Shape::drawTriangle() {
+/*void Shape::drawTriangle() {
 	float CubeAngle;
 	
 
@@ -240,7 +239,7 @@ void Shape::drawTriangle() {
 
 	glBindVertexArray(0);
 	glUseProgram(0);
-}
+}*/
 
 
 
@@ -277,4 +276,14 @@ void Shape::serveTime() {
 	}
 
 	LastTime = Now;*/
+}
+
+float Shape::getZ() {
+	return posZ;
+}
+void Shape::setZ(float Z) {
+	posZ = Z;
+}
+float Shape::getY() {
+	return posY;
 }

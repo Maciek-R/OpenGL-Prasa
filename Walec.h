@@ -95,11 +95,20 @@ private:
 	GLuint Model_Location;
 	GLuint View_Location;
 	GLuint Projection_Location;
+
+	bool running;
+	float scaleY;
+	int up;
 public:
 	Walec(Camera *);
 	void createShader();
 	void createWalec();
 	void drawWalec();
+	void serveTime();
+
+	void start();
+	void stop();
+	float getScaleY();
 };
 
 

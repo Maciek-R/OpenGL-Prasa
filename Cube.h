@@ -2,6 +2,7 @@
 #define CUBE_H
 #include "Shape.h"
 #include <SOIL.h>
+#include "Walec.h"
 class Cube : public Shape {
 private:
 
@@ -32,15 +33,27 @@ private:
 	GLuint Model_Location;
 	GLuint View_Location;
 	GLuint Projection_Location;
-
+	char* textureName;
 
 	GLint lightPosLoc;
 	GLuint texture0;
+	float scaleX;
+	float scaleY;
+	float scaleZ;
+	float RotateZ;
+	Walec * walec;
 public:
 	Cube(Camera *);
+	Cube(Camera *, float, float, float);
+	Cube(Camera *, float, float, float, float, float, float);
 	void createShader();
 	void drawCube();
 	void createCube();
+	void setTexture(char *);
+	void move(int);
+	void doNotMove();
+	void setScaleYOf(Walec *);
+	void setRotateZ(float Z);
 
 };
 

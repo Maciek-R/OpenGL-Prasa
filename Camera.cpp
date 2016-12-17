@@ -45,7 +45,7 @@ void Camera::serveEvents(){
 	if (LastTime == 0)
 		LastTime = Now;
 
-	float przes = 30 * ((float)(Now - LastTime) / CLOCKS_PER_SEC);
+	float przes =10*  ((float)(Now - LastTime) / CLOCKS_PER_SEC);
 
 	//std::cout << AngleHor << std::endl;
 	//std::cout << "X: "<<cameraPosX << std::endl;
@@ -72,8 +72,26 @@ void Camera::serveEvents(){
 		Z-= przes * glm::sin(glm::radians(AngleHor));
 		X-= przes * glm::cos(glm::radians(AngleHor));
 	}
+	if (isPressingY) {
+		Y += przes;
+	}
+	if (isPressingH) {
+		Y -= przes;
+		//if (Y < 0.2f) Y = 0.2f;
+	}
+
+
+	if (X < 0.15) X = 0.15;
+	else if (X > 11.85) X = 11.85;
+
+	if (Z < 0.15) Z = 0.15;
+	else if (Z > 11.85) Z = 11.85;
+
+	if (Y < 0.15) Y = 0.15;
+	else if (Y > 11.85) Y = 11.85;
 
 	LastTime = Now;
+	//std::cout << this->X <<" "<< this->Z << std::endl;
 }
 float Camera::getX() {
 	return X;

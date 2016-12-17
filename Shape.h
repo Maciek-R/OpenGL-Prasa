@@ -33,13 +33,14 @@ public:
 	Shape();
 	Shape(Camera *);
 	
+	float getZ();
+	float getY();
 
-	
-
-	void createTriangle();
-	void drawTriangle();
+	void setZ(float Z);
+	// createTriangle();
+	//void drawTriangle();
 	virtual void createShader();
-	void serveTime();
+	virtual void serveTime();
 };
 
 #endif

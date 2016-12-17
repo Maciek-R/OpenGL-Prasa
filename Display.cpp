@@ -10,6 +10,11 @@ bool isPressingW = false;
 bool isPressingS = false;
 bool isPressingA = false;
 bool isPressingD = false;
+bool isPressingY = false;
+bool isPressingH = false;
+bool pressedP = true;
+
+int PREDKOSC = 1;
 
 float AngleHor = 0;
 float AngleVer = 0;
@@ -134,24 +139,69 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	else if (key == GLFW_KEY_S && action == GLFW_RELEASE) {
 		isPressingS = false;
 	}
-	if ((key == GLFW_KEY_O && action == GLFW_PRESS) || (key == GLFW_KEY_O && action == GLFW_REPEAT)) {
-		AngleHor -= 5.0f;
+	if (key == GLFW_KEY_Y && action == GLFW_PRESS) {
+		isPressingY = true;
 	}
-	if ((key == GLFW_KEY_P && action == GLFW_PRESS) || (key == GLFW_KEY_P && action == GLFW_REPEAT)) {
-		AngleHor += 5.0f;
+	else if (key == GLFW_KEY_Y && action == GLFW_RELEASE) {
+		isPressingY = false;
 	}
-	if ((key == GLFW_KEY_K && action == GLFW_PRESS) || (key == GLFW_KEY_K && action == GLFW_REPEAT)) {
-		AngleVer -= 5.0f;
+	if (key == GLFW_KEY_H && action == GLFW_PRESS) {
+		isPressingH = true;
 	}
-	if ((key == GLFW_KEY_L && action == GLFW_PRESS) || (key == GLFW_KEY_L && action == GLFW_REPEAT)) {
-		AngleVer += 5.0f;
+	else if (key == GLFW_KEY_H && action == GLFW_RELEASE) {
+		isPressingH = false;
 	}
+	if (key == GLFW_KEY_P && action == GLFW_PRESS) {
+		pressedP = true;
+	}
+	if (key == GLFW_KEY_L && action == GLFW_PRESS) {
+		pressedP = false;
+	}
+	if (key == GLFW_KEY_KP_ADD && action == GLFW_PRESS) {
+		if (++PREDKOSC == 11)
+			PREDKOSC = 10;
+	}
+	if (key == GLFW_KEY_KP_SUBTRACT && action == GLFW_PRESS) {
+		if (--PREDKOSC == 0)
+			PREDKOSC = 1;
+	}
+	
 }
 
 static void cursorPos_callback(GLFWwindow* window, double posX, double posY) {
 	
-	AngleVer = -posY;
-	AngleHor = posX;
+	static double lastPosX;
+	static double lastPosY;
+
+	static bool firstTime = true;
+
+	if (firstTime == true) {
+		lastPosX = posX;
+		lastPosY = posY;
+		firstTime = false;
+	}
+
+	double offsetX = posX - lastPosX;
+	double offsetY = posY - lastPosY;
+
+	lastPosX = posX;
+	lastPosY = posY;
+
+	AngleHor += offsetX;
+	AngleVer -= offsetY;
+
+	//AngleVer = -posY;
+	//AngleHor = posX;
+
+	if (AngleVer > 89) AngleVer = 89;
+	else if (AngleVer < -89) AngleVer = -89;
+
+	/*if (AngleVer >= 90) {
+		glfwSetCursorPos(window, AngleVer, -90);
+		AngleVer = 90;
+	}*/
+
+//	if (AngleVer > 90) AngleVer = 90;
 
 	/*if (AngleVer < -90) {
 		glfwSetCursorPos(window, AngleHor, 0);

@@ -11,6 +11,11 @@ extern bool isPressingW;
 extern bool isPressingS;
 extern bool isPressingA;
 extern bool isPressingD;
+extern bool isPressingY;
+extern bool isPressingH;
+extern bool pressedP;
+
+extern int PREDKOSC;
 
 /*static glm::vec3 getLookAt() {					//only works when camera position is (0,0,0) in glm::lookAt (first parameter)
 	float cosAlfa = glm::cos(glm::radians(AngleHor));

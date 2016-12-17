@@ -5,26 +5,57 @@
 #include "Cube.h"
 #include "Terrain.h"
 #include "Walec.h"
+#include "House.h"
+#include "Tasma.h"
 
+#include <vector>
 int main()
 {
 	Display display;
 	display.init();
 
-	Camera camera(0,0,0);
+	Camera camera(0,0.2f,0);
 	
 	Terrain terrain(&camera);
 	terrain.createShader();
 	terrain.createTerrain();
 
-	Triangle tr(&camera);
+	/*Triangle tr(&camera);
 	tr.createShader();
-	//tr.createCube();
-	tr.createNewTriangle();
+	tr.createNewTriangle();*/
 
-	/*Triangle ttt(&camera);
-	ttt.createShader();
-	ttt.createTriangle();*/
+	vector<Cube*> podpory;
+	Cube * pod1 = new Cube(&camera, 4, 0.88, 6, 0.5, 1.75, 0.5);
+	pod1->createShader();
+	pod1->createCube();
+	podpory.push_back(pod1);
+	Cube * pod2 = new Cube(&camera, 5, 2, 6, 0.5, 4, 0.5);
+	pod2->createShader();
+	pod2->setRotateZ(90);
+	pod2->createCube();
+	podpory.push_back(pod2);
+	Cube * pod3 = new Cube(&camera, 6, 0.88, 6, 0.5, 1.75, 0.5);
+	pod3->createShader();
+	pod3->createCube();
+	podpory.push_back(pod3);
+
+
+
+	vector<Cube*> cubes;
+	Cube * cub = new Cube(&camera, 5, 0.5f, 1, 0.5, 0.5, 0.5);
+	cub->setTexture("grassy.png");
+	cub->createShader();
+	cub->createCube();
+	cubes.push_back(cub);
+	
+	Cube sciany(&camera, 6,6,6, 12,12,12);
+	sciany.setTexture("sciana.png");
+	sciany.createShader();
+	sciany.createCube();
+
+	//Cube tasma(&camera, 5,0,6, 0.5,0.5,12);
+	//tasma.createShader();
+	//tasma.createCube();
 
 	Cube cube(&camera);
 	cube.createShader();
@@ -34,24 +65,110 @@ int main()
 	walec.createShader();
 	walec.createWalec();
 
+	House house(&camera);
+	house.createShader();
+	house.createHouse();
+	House house2(&camera, 5, 0, 11, 180);
+	house2.createShader();
+	house2.createHouse();
 
+	Tasma tas(&camera);
+
+	int indexWaitFor = 0;
+	clock_t LastTime = 0;
+	bool stop = false;
 	do
 	{
 		display.prepare();  
 		camera.serveEvents();
 
-		tr.serveTime();
+		//tr.serveTime();
 		cube.serveTime();
 		terrain.serveTime();
 
-		//ttt.drawTriangle();
 		terrain.drawTerrain();
-		//tr.drawCube();
-		tr.drawNewTriangle();
+		//tr.drawNewTriangle();
 		cube.drawCube();
 
 		walec.serveTime();
 		walec.drawWalec();
+
+		sciany.drawCube();
+
+		house.serveTime();
+		house.drawHouse();
+		house2.serveTime();
+		house2.drawHouse();
+
+		for (int i = 0; i < podpory.size(); ++i) {
+			podpory[i]->drawCube();
+		}
+
+		//tasma.serveTime();
+	//	tasma.drawCube();
+		
+		
+
+		if (pressedP) {
+			if(!stop)
+			for (int i = 0; i < cubes.size(); ++i) {
+				cubes[i]->move(3);
+				tas.movePieces();
+			}
+
+			if (cubes[cubes.size() - 1]->getZ() > 2) {
+				Cube * c = new Cube(&camera, 5, 0.5f, 1, 0.5, 0.5, 0.5);
+				c->setTexture("grassy.png");
+				c->createShader();
+				c->createCube();
+				cubes.push_back(c);
+			}
+
+			if(!stop)
+			if (cubes[indexWaitFor]->getZ() >= 6) {	//wspolrzedna Z walca
+				cubes[indexWaitFor]->setScaleYOf(&walec);
+				stop = true;
+				walec.start();
+				LastTime = clock();
+				std::cout << "Teraz" << std::endl;
+				indexWaitFor++;
+			}
+
+
+			if (cubes[0]->getZ() > 11) {
+				cubes.erase(cubes.begin());
+				indexWaitFor--;
+			}
+		}
+		else {
+			for (int i = 0; i < cubes.size(); ++i) {
+				cubes[i]->doNotMove();
+				tas.doNotMovePieces();
+			}
+
+		}
+		
+		for (int i = 0; i < cubes.size(); ++i) {
+			cubes[i]->drawCube();
+		}
+
+
+
+		if (stop) {
+			for (int i = 0; i < cubes.size(); ++i) {
+				cubes[i]->doNotMove();
+				tas.doNotMovePieces();
+			}
+			clock_t Now = clock();
+
+			
+			if (((float)(Now - LastTime) / CLOCKS_PER_SEC) > 2 / float(PREDKOSC)) {
+				stop = false;
+				std::cout << ((float)(Now - LastTime) / CLOCKS_PER_SEC) << std::endl;
+			}
+		}
+		//tas.movePieces();
+		tas.drawPieces();
 
 		display.swapBuffers(); 
 		display.pollEvents();

@@ -1,3 +1,5 @@
-﻿  Cube.cpp
+﻿  Display.cpp
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\display.cpp(190): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\display.cpp(191): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
   opengl.vcxproj -> D:\VisualStudio2015\Projekty\NEWOPENGLTUTORIAL\opengl\Debug\opengl.exe
   opengl.vcxproj -> D:\VisualStudio2015\Projekty\NEWOPENGLTUTORIAL\opengl\Debug\opengl.pdb (Partial PDB)

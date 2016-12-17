@@ -19,12 +19,12 @@ void Triangle::createNewTriangle() {
 	glGenBuffers(1, &vboId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(VERTICES), VERTICES, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)0);
 
 	glGenBuffers(1, &colorId);
 	glBindBuffer(GL_ARRAY_BUFFER, colorId);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(COLORS), COLORS, GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)0);
 
 	glGenBuffers(1, &eboId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId);
@@ -70,7 +70,7 @@ void Triangle::drawNewTriangle() {
 	glUniformMatrix4fv(mvp_location, 1, GL_FALSE, &mvp[0][0]);
 
 	glBindVertexArray(vaoId);
-	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, (GLvoid*)0);
+	glDrawElements(GL_TRIANGLES, _countof(INDICES), GL_UNSIGNED_INT, (GLvoid*)0);
 	glBindVertexArray(0);
 	glUseProgram(0);
 }

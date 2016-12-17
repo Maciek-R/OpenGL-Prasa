@@ -26,7 +26,8 @@ public:
 	void pollEvents();
 	int windowShouldClose();
 	void destroyWindowAndTerminate();
-	
+	//void Display::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	//void Display::error_callback(int error, const char* description);
 
 };
 

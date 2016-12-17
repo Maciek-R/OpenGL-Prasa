@@ -34,7 +34,7 @@ const GLchar* FragmentShaderT =
 	"void main(void)\n"\
 	"{\n"\
 	/*"  out_Color = vec4(ex_Color, 1.0);\n"\*/
-	"  out_Color = texture(Texture0, TexCoord*5);\n"\
+	"  out_Color = texture(Texture0, TexCoord*50);\n"\
 	"}\n"
 };
 
@@ -81,7 +81,7 @@ void Terrain::createTerrain() {
 	for (int i = 0; i < VERTEX_COUNT; ++i) {
 		for (int j = 0; j < VERTEX_COUNT; ++j) {
 			GLfloat x = (float(j) / float(VERTEX_COUNT - 1)) * SIZE;
-			GLfloat y = -20;
+			GLfloat y = 0;
 			GLfloat z = (float(i) / float(VERTEX_COUNT - 1)) * SIZE;
 
 			VERTICES[counter] = x;
@@ -182,7 +182,7 @@ void Terrain::createTerrain() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	texture0 = LoadMipmapTexture(GL_TEXTURE0, "bruk.png");
+	texture0 = LoadMipmapTexture(GL_TEXTURE0, "grassy.png");
 
 }
 
@@ -202,7 +202,7 @@ void Terrain::drawTerrain() {
 	//YYY = glm::sin(Angle);
 	//ZZZ = glm::cos(Angle);
 
-	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(0 - cam->getX(), 0 - cam->getY(), 0 - cam->getZ()));
+	ModelMatrix = glm::translate(ModelMatrix, glm::vec3(posX, posY, posZ));
 	//ModelMatrix = glm::translate(ModelMatrix, glm::vec3(XXX - 1 - cameraPosX, YYY - cameraPosY, 0 - cameraPosZ));
 	//ModelMatrix = glm::translate(ModelMatrix, glm::vec3(XXX - 1 - cameraPosX, -1 - cameraPosY, 0 - cameraPosZ));
 	//ModelMatrix = glm::rotate(ModelMatrix, Angle / 10, glm::vec3(0, 1, 0));
