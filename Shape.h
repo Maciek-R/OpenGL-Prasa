@@ -21,6 +21,8 @@ protected:
 		vaoId,
 		vboId,
 		colorId,
+		normalId,
+		texId,
 		eboId;
 
 	Camera * cam;

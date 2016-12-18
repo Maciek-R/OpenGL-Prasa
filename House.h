@@ -2,6 +2,9 @@
 #define HOUSE_H
 #include"Shape.h"
 #include <SOIL.h>
+#include <vector>
+#include "Wall.h"
+using namespace std;
 class House : public Shape{
 private:
 
@@ -186,10 +189,13 @@ private:
 	GLuint texId;
 	GLuint LoadMipmapTexture(GLuint texId, const char* fname);
 	float Rotation;
+
+	vector<Wall*> walls;
 public:
 	House(Camera*);
 	House(Camera*, float, float, float, float);
-	void createHouse();
+	void createHouse(float, float, float);
+	void createHouse180(float, float, float);
 	void drawHouse();
 
 

@@ -256,8 +256,8 @@ void Cube::drawCube() {
 	glUniformMatrix4fv(Model_Location, 1, GL_FALSE, &ModelMatrix[0][0]);
 	glUniformMatrix4fv(View_Location, 1, GL_FALSE, &ViewMatrix[0][0]);
 	glUniformMatrix4fv(Projection_Location, 1, GL_FALSE, &ProjectionMatrix[0][0]);
-	//glUniform3f(lightPosLoc, cam->getX(), cam->getY(), cam->getZ());
-	glUniform3f(lightPosLoc, 2, 1, 2);
+	glUniform3f(lightPosLoc, cam->getX(), cam->getY(), cam->getZ());
+	//glUniform3f(lightPosLoc, 8, 1, 2);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture0);

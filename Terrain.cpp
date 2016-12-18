@@ -81,7 +81,7 @@ void Terrain::createTerrain() {
 	for (int i = 0; i < VERTEX_COUNT; ++i) {
 		for (int j = 0; j < VERTEX_COUNT; ++j) {
 			GLfloat x = (float(j) / float(VERTEX_COUNT - 1)) * SIZE;
-			GLfloat y = 0;
+			GLfloat y = -0.01;
 			GLfloat z = (float(i) / float(VERTEX_COUNT - 1)) * SIZE;
 
 			VERTICES[counter] = x;

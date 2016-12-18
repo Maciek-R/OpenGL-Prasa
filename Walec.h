@@ -2,6 +2,7 @@
 #define WALEC_H
 
 #include "Shape.h"
+#include "SOIL.h"
 
 #define VERTEX_COUNT 30		//liczba wierzcho³ków podstawy
 
@@ -91,10 +92,16 @@ private:
 	//GLfloat VERTICES[(VERTEX_COUNT*3)*2 + (VERTEX_COUNT*6)];
 	GLfloat VERTICES[(VERTEX_COUNT * 3)*3*2 + (VERTEX_COUNT*6*3)];
 	GLfloat COLORS[(VERTEX_COUNT * 3)*3*2 + (VERTEX_COUNT * 6 * 3)];
+	GLfloat NORMALS[(VERTEX_COUNT * 3) * 3 * 2 + (VERTEX_COUNT * 6 * 3)];
+	GLfloat TEXTURE_COORDS[(VERTEX_COUNT * 3) * 2 * 2 + (VERTEX_COUNT * 6 * 2)];
 
 	GLuint Model_Location;
 	GLuint View_Location;
 	GLuint Projection_Location;
+	GLint lightPosLoc;
+	GLuint texture0;
+
+	GLuint LoadMipmapTexture(GLuint texId, const char* fname);
 
 	bool running;
 	float scaleY;

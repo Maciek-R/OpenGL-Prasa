@@ -7,6 +7,7 @@
 #include "Walec.h"
 #include "House.h"
 #include "Tasma.h"
+#include "Wall.h"
 
 #include <vector>
 int main()
@@ -16,9 +17,19 @@ int main()
 
 	Camera camera(0,0.2f,0);
 	
-	Terrain terrain(&camera);
-	terrain.createShader();
-	terrain.createTerrain();
+	//Terrain terrain(&camera);
+	//terrain.createShader();
+	//terrain.createTerrain();
+
+	//Wall wall(&camera, 3,1,3, 1);
+	//wall.createShader();
+	//wall.createWall();
+
+	House house(&camera);
+	house.createHouse(0, 0, 0);
+
+	House house2(&camera);
+	house2.createHouse180(0, 0, 10);
 
 	/*Triangle tr(&camera);
 	tr.createShader();
@@ -48,10 +59,23 @@ int main()
 	cub->createCube();
 	cubes.push_back(cub);
 	
-	Cube sciany(&camera, 6,6,6, 12,12,12);
-	sciany.setTexture("sciana.png");
-	sciany.createShader();
-	sciany.createCube();
+	//Cube sciany(&camera, 6,6,6, 12,12,12);
+	//sciany.setTexture("sciana.png");
+	//sciany.createShader();
+	//sciany.createCube();
+
+	vector<Wall *> sciany;
+	sciany.push_back(new Wall(&camera, 6, 6, -0.001, 6, 6, 1, 0, 0));
+	sciany.push_back(new Wall(&camera, 12, 6, 6, 6, 6, 1, 270, 0));
+	sciany.push_back(new Wall(&camera, 6, 6, 12.001, 6, 6, 1, 180, 0));
+	sciany.push_back(new Wall(&camera, 0, 6, 6, 6, 6, 1, 90, 0));
+	sciany.push_back(new Wall(&camera, 6, 12, 6, 6, 6, 1, 0, 90));
+	sciany.push_back(new Wall(&camera, 6, 0, 6, 6, 6, 1, 0, 270));//podloga
+
+	for (int i = 0; i < sciany.size(); ++i) {
+		sciany[i]->createShader();
+		sciany[i]->createWall();
+	}
 
 	//Cube tasma(&camera, 5,0,6, 0.5,0.5,12);
 	//tasma.createShader();
@@ -65,12 +89,12 @@ int main()
 	walec.createShader();
 	walec.createWalec();
 
-	House house(&camera);
+	/*House house(&camera);
 	house.createShader();
 	house.createHouse();
 	House house2(&camera, 5, 0, 11, 180);
 	house2.createShader();
-	house2.createHouse();
+	house2.createHouse();*/
 
 	Tasma tas(&camera);
 
@@ -84,21 +108,29 @@ int main()
 
 		//tr.serveTime();
 		cube.serveTime();
-		terrain.serveTime();
+		//terrain.serveTime();
 
-		terrain.drawTerrain();
+		//wall.drawWall();
+		house.drawHouse();
+		house2.drawHouse();
+
+	//	terrain.drawTerrain();
 		//tr.drawNewTriangle();
 		cube.drawCube();
 
 		walec.serveTime();
 		walec.drawWalec();
 
-		sciany.drawCube();
+		for (int i = 0; i < sciany.size(); ++i) {
+			sciany[i]->drawWall();
+		}
 
-		house.serveTime();
-		house.drawHouse();
-		house2.serveTime();
-		house2.drawHouse();
+		//sciany.drawCube();
+
+	//	house.serveTime();
+	//	house.drawHouse();
+	//	house2.serveTime();
+	//	house2.drawHouse();
 
 		for (int i = 0; i < podpory.size(); ++i) {
 			podpory[i]->drawCube();

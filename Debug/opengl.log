@@ -1,5 +1,47 @@
-﻿  Display.cpp
-d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\display.cpp(190): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\display.cpp(191): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+﻿  Walec.cpp
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(162): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(163): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(164): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(165): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(166): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(167): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(168): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(169): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(170): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(182): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(183): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(186): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(187): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(202): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(203): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(204): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(205): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(206): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(207): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(208): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(209): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(210): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(243): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(244): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(245): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(246): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(247): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(248): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(249): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(250): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(251): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(286): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(287): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(288): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(289): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(290): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(291): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(292): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(293): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(294): warning C4244: '=': conversion from 'int' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(307): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(308): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(311): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\walec.cpp(312): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
   opengl.vcxproj -> D:\VisualStudio2015\Projekty\NEWOPENGLTUTORIAL\opengl\Debug\opengl.exe
   opengl.vcxproj -> D:\VisualStudio2015\Projekty\NEWOPENGLTUTORIAL\opengl\Debug\opengl.pdb (Partial PDB)

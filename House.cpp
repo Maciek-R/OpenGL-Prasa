@@ -3,13 +3,19 @@
 House::House(Camera * cam) {
 	this->cam = cam;
 
-	posX = 5;
+
+
+
+	posX = 0;
 	posY = 0;
-	posZ = 1;
-	Rotation = 0;
+	posZ = 0;
+	//Rotation = 0;
 }
 House::House(Camera * cam, float X, float Y, float Z, float rotationY) {
 	this->cam = cam;
+
+	//	walls.push_back(new Wall(cam, 5, 1, 2, 0));
+	
 
 	posX = X;
 	posY = Y;
@@ -36,9 +42,36 @@ GLuint House::LoadMipmapTexture(GLuint texId, const char* fname)
 	return texture;
 }
 
-void House::createHouse() {
+void House::createHouse(float X, float Y, float Z) {
 
+	walls.push_back(new Wall(cam, X + 5, Y + 1.5, Z + 2, 1, 0.5, 1, 0, 0));
+	walls.push_back(new Wall(cam, X + 5, Y + 1.5, Z + 1.99, 1, 0.5, 1, 180, 0));
 
+	walls.push_back(new Wall(cam, X + 4.375, Y + 0.5, Z + 2, 0.375, 0.5, 1, 0, 0));
+	walls.push_back(new Wall(cam, X + 4.375, Y + 0.5, Z + 1.99, 0.375, 0.5, 1, 180, 0));
+
+	walls.push_back(new Wall(cam, X + 5.625, Y + 0.5, Z + 2, 0.375, 0.5, 1, 0, 0));
+	walls.push_back(new Wall(cam, X + 5.625, Y + 0.5, Z + 1.99, 0.375, 0.5, 1, 180, 0));
+
+	walls.push_back(new Wall(cam, X + 6, Y + 1, Z + 1, 90, 0));
+	walls.push_back(new Wall(cam, X + 5.99, Y + 1, Z + 1, 270, 0));
+
+	walls.push_back(new Wall(cam, X + 4, Y + 1, Z + 1, 270, 0));
+	walls.push_back(new Wall(cam, X + 4.01, Y + 1, Z + 1, 90, 0));
+
+	walls.push_back(new Wall(cam, X + 5, Y + 2, Z + 1, 0, 270));//dach
+	walls.push_back(new Wall(cam, X + 5, Y + 1.99, Z + 1, 0, 90));//dach
+
+	walls.push_back(new Wall(cam, X + 5, Y + 0.02, Z + 1, 0, 270));//podloga
+
+	walls.push_back(new Wall(cam, X + 5, Y + 1, Z + 0, 0, 0));//tyl
+
+	for (int i = 0; i < walls.size(); ++i) {
+		walls[i]->createShader();
+		walls[i]->createWall();
+	}
+
+/*
 	glGenVertexArrays(1, &vaoId);
 	glBindVertexArray(vaoId);
 
@@ -72,10 +105,48 @@ void House::createHouse() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	texture0 = LoadMipmapTexture(GL_TEXTURE0, "bruk.png");
+
+	*/
 }
 
+void House::createHouse180(float X, float Y, float Z) {
+
+	walls.push_back(new Wall(cam, X + 5, Y + 1.5, Z + 0, 1, 0.5, 1, 180, 0));//
+	walls.push_back(new Wall(cam, X + 5, Y + 1.5, Z + 0.01, 1, 0.5, 1, 0, 0));//
+
+	walls.push_back(new Wall(cam, X + 4.375, Y + 0.5, Z + 0, 0.375, 0.5, 1, 180, 0));
+	walls.push_back(new Wall(cam, X + 4.375, Y + 0.5, Z + 0.01, 0.375, 0.5, 1, 0, 0));
+
+	walls.push_back(new Wall(cam, X + 5.625, Y + 0.5, Z + 0, 0.375, 0.5, 1, 180, 0));
+	walls.push_back(new Wall(cam, X + 5.625, Y + 0.5, Z + 0.01, 0.375, 0.5, 1, 0, 0));
+
+	walls.push_back(new Wall(cam, X + 6, Y + 1, Z + 1, 90, 0));
+	walls.push_back(new Wall(cam, X + 5.99, Y + 1, Z + 1, 270, 0));
+
+	walls.push_back(new Wall(cam, X + 4, Y + 1, Z + 1, 270, 0));
+	walls.push_back(new Wall(cam, X + 4.01, Y + 1, Z + 1, 90, 0));
+
+	walls.push_back(new Wall(cam, X + 5, Y + 2, Z + 1, 0, 270));//dach
+	walls.push_back(new Wall(cam, X + 5, Y + 1.99, Z + 1, 0, 90));//dach
+
+	walls.push_back(new Wall(cam, X + 5, Y + 0.02, Z + 1, 0, 270));//podloga
+
+	walls.push_back(new Wall(cam, X + 5, Y + 1, Z + 2, 180, 0));//tyl  //
+
+	for (int i = 0; i < walls.size(); ++i) {
+		walls[i]->createShader();
+		walls[i]->createWall();
+	}
+}
+
+
 void House::drawHouse() {
-	float CubeAngle;
+
+	for (int i = 0; i < walls.size(); ++i) {
+		walls[i]->drawWall();
+	}
+
+	/*float CubeAngle;
 
 
 
@@ -112,5 +183,5 @@ void House::drawHouse() {
 	//glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, (GLvoid*)0);
 	glDrawArrays(GL_TRIANGLES, 0, _countof(VERTICES)/3);
 	glBindVertexArray(0);
-	glUseProgram(0);
+	glUseProgram(0);*/
 }
