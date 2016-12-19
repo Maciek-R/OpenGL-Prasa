@@ -2,7 +2,6 @@
 #define WALL_H
 
 #include "Shape.h"
-#include "SOIL.h"
 class Wall : public Shape {
 private:
 	GLfloat VERTICES[18] = {
@@ -41,26 +40,20 @@ private:
 		0,0,1
 	};
 
-	GLuint Model_Location;
-	GLuint View_Location;
-	GLuint Projection_Location;
-	GLint lightPosLoc;
-
-	GLuint texture0;
-	GLuint texId;
-	GLuint LoadMipmapTexture(GLuint texId, const char* fname);
 	float RotationY;
 	float RotationZ;
 
 	float scaleX;
 	float scaleY;
 	float scaleZ;
+	void init(Camera *, Light *, float, float, float, float, float);
 public:
-	Wall(Camera*, float, float, float, float, float);
-	Wall(Camera*, float, float, float, float, float, float, float, float);
-	void createShader();
+	Wall(Camera*, Light*, float, float, float, float, float);
+	Wall(Camera*, Light*, float, float, float, float, float, float, float, float);
+	//void createShader();
 	void createWall();
 	void drawWall();
+	void setMulti(int);
 
 };
 

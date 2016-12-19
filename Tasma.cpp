@@ -1,17 +1,17 @@
 #include "Tasma.h"
 
-Tasma::Tasma(Camera *cam) {
+Tasma::Tasma(Camera *cam, Light* light) {
 	float Z = 0;
 	for (int i = 0; i < N; ++i) {
-		pieceUp[i] = new Cube(cam, 5, 0.1875, Z, 0.5, 0.125, 0.5);
+		pieceUp[i] = new Cube(cam, light, 5, 0.1875, Z, 0.5, 0.125, 0.5);
 		pieceUp[i]->createShader();
 		pieceUp[i]->setTexture("tas.png");
-		pieceUp[i]->createCube();
+		pieceUp[i]->create();
 
-		pieceDown[i] = new Cube(cam, 5, 0.0625, 12-Z, 0.5, 0.125, 0.5);
+		pieceDown[i] = new Cube(cam, light, 5, 0.0625, 12-Z, 0.5, 0.125, 0.5);
 		pieceDown[i]->createShader();
 		pieceDown[i]->setTexture("tas.png");
-		pieceDown[i]->createCube();
+		pieceDown[i]->create();
 
 		Z += 0.5;
 	}
@@ -20,8 +20,8 @@ Tasma::Tasma(Camera *cam) {
 
 void Tasma::drawPieces() {
 	for (int i = 0; i < N; ++i) {
-		pieceUp[i]->drawCube();
-		pieceDown[i]->drawCube();
+		pieceUp[i]->draw();
+		pieceDown[i]->draw();
 	}
 }
 void Tasma::movePieces() {

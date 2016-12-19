@@ -4,29 +4,14 @@ Camera::Camera(float X, float Y, float Z) {
 	this->X = X;
 	this->Y = Y;
 	this->Z = Z;
+	srand(time(NULL));
 }
 
 glm::vec3 Camera::getVec3() {
 	return glm::vec3(X, Y, Z);
 }
 
-glm::vec3 Camera::getLookAt() {					//only works when camera position is (0,0,0) in glm::lookAt (first parameter)
-	float cosAlfa = glm::cos(glm::radians(AngleHor));
-	float cosBeta = glm::cos(glm::radians(AngleVer));
-	float sinAlfa = glm::sin(glm::radians(AngleHor));
-	float sinBeta = glm::sin(glm::radians(AngleVer));
-
-	float x = cosAlfa*cosBeta;
-	float y = sinBeta;
-	float z = sinAlfa*cosBeta;
-
-	return glm::vec3(x, y, z);
-};
-glm::vec3 Camera::getLookAt(glm::vec3 vector) {					//only works when camera position is (0,0,0) in glm::lookAt (first parameter)
-
-	glm::vec3 out = glm::vec3(vector.x-X, vector.y-Y, vector.z-Z);
-
-
+glm::vec3 Camera::getLookAt() {					
 	float cosAlfa = glm::cos(glm::radians(AngleHor));
 	float cosBeta = glm::cos(glm::radians(AngleVer));
 	float sinAlfa = glm::sin(glm::radians(AngleHor));
@@ -47,10 +32,6 @@ void Camera::serveEvents(){
 
 	float przes =10*  ((float)(Now - LastTime) / CLOCKS_PER_SEC);
 
-	//std::cout << AngleHor << std::endl;
-	//std::cout << "X: "<<cameraPosX << std::endl;
-	//std::cout << "Z: " << cameraPosZ << std::endl;
-
 	if (isPressingA) {
 		Z += przes * glm::sin(glm::radians(AngleHor - 90));
 		X+= przes * glm::cos(glm::radians(AngleHor - 90));
@@ -60,13 +41,9 @@ void Camera::serveEvents(){
 		X+= przes * glm::cos(glm::radians(AngleHor + 90));
 	}
 	if (isPressingW) {
-		if (FIRST_PERSON_MODE) {
 			Z += przes * glm::sin(glm::radians(AngleHor));
 			X += przes * glm::cos(glm::radians(AngleHor));
-		}
-		else {
-
-		}
+		
 	}
 	if (isPressingS) {
 		Z-= przes * glm::sin(glm::radians(AngleHor));
@@ -77,7 +54,6 @@ void Camera::serveEvents(){
 	}
 	if (isPressingH) {
 		Y -= przes;
-		//if (Y < 0.2f) Y = 0.2f;
 	}
 
 
@@ -91,7 +67,6 @@ void Camera::serveEvents(){
 	else if (Y > 11.85) Y = 11.85;
 
 	LastTime = Now;
-	//std::cout << this->X <<" "<< this->Z << std::endl;
 }
 float Camera::getX() {
 	return X;

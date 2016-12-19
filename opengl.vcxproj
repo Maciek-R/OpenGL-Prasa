@@ -124,13 +124,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="House.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Prasa.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tasma.cpp" />
-    <ClCompile Include="Terrain.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Walec.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -140,15 +139,14 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="House.h" />
+    <ClInclude Include="Prasa.h" />
     <ClInclude Include="Tasma.h" />
     <ClInclude Include="Walec.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="GLOBALS.h" />
-    <ClInclude Include="Terrain.h" />
-    <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Utils.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

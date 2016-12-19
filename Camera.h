@@ -6,7 +6,7 @@
 #include <time.h>
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
-#include<iostream>
+#include <iostream>
 using namespace std;
 class Camera {
 private:
@@ -18,10 +18,8 @@ private:
 public:
 	Camera(float, float, float);
 	glm::vec3 getLookAt();
-	glm::vec3 getLookAt(glm::vec3);
 
 	glm::vec3 getVec3();
-	bool FIRST_PERSON_MODE = true;
 	void serveEvents();
 	
 	void setX(float);

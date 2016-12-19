@@ -1,7 +1,5 @@
 #include "Display.h"
 
-
-
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 static void cursorPos_callback(GLFWwindow* window, double posX, double posY);
 static void error_callback(int error, const char* description);
@@ -42,7 +40,7 @@ void Display::init() {
 	//GLFWwindow* indow;
 
 	//Create a window and create its OpenGL context  
-	Window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Test Window", NULL, NULL);
+	Window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL Project", NULL, NULL);
 
 	//If the window couldn't be created  
 	if (!Window)
@@ -81,8 +79,6 @@ void Display::init() {
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
-
-	ExitOnGLError("ERROR: Could not set OpenGL culling options");
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 }
@@ -190,24 +186,8 @@ static void cursorPos_callback(GLFWwindow* window, double posX, double posY) {
 	AngleHor += offsetX;
 	AngleVer -= offsetY;
 
-	//AngleVer = -posY;
-	//AngleHor = posX;
 
 	if (AngleVer > 89) AngleVer = 89;
 	else if (AngleVer < -89) AngleVer = -89;
 
-	/*if (AngleVer >= 90) {
-		glfwSetCursorPos(window, AngleVer, -90);
-		AngleVer = 90;
-	}*/
-
-//	if (AngleVer > 90) AngleVer = 90;
-
-	/*if (AngleVer < -90) {
-		glfwSetCursorPos(window, AngleHor, 0);
-	}
-	else if (AngleVer > 90) {
-		glfwSetCursorPos(window, AngleHor, 0);
-	}
-	std::cout << AngleVer << std::endl;*/
 }

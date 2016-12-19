@@ -2,7 +2,7 @@
 #define TASMA_H
 
 #include "Cube.h"
-#include<vector>
+#include <vector>
 using namespace std;
 
 #define N 35
@@ -13,7 +13,7 @@ private:
 	Cube* pieceUp[N];
 	
 public:
-	Tasma(Camera*);
+	Tasma(Camera*, Light *);
 	void movePieces();
 	void doNotMovePieces();
 	void drawPieces();
