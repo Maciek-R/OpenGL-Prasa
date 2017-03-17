@@ -1,2 +1,0 @@
-﻿  main.cpp
-d:\visualstudio2015\projekty\newopengltutorial\opengl\opengl\main.cpp(2): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
